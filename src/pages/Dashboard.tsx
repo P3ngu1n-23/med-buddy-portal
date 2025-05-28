@@ -18,15 +18,15 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <h1 className="text-2xl font-bold text-gray-900">Patient Dashboard</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Trang chủ</h1>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="outline" size="sm">
                 <User className="h-4 w-4 mr-2" />
-                Profile
+                Hồ sơ
               </Button>
               <Button variant="outline" size="sm">
-                Logout
+                Đăng xuất
               </Button>
             </div>
           </div>
@@ -37,10 +37,10 @@ const Dashboard = () => {
         {/* Navigation Tabs */}
         <div className="flex space-x-1 mb-8 bg-gray-100 rounded-lg p-1">
           {[
-            { id: 'overview', label: 'Overview', icon: Calendar },
-            { id: 'search', label: 'Find Doctors', icon: Search },
-            { id: 'appointments', label: 'My Appointments', icon: Clock },
-            { id: 'chatbot', label: 'Health Assistant', icon: MessageSquare },
+            { id: 'overview', label: 'Tổng quan', icon: Calendar },
+            { id: 'search', label: 'Tìm bác sĩ', icon: Search },
+            { id: 'appointments', label: 'Lịch hẹn của tôi', icon: Clock },
+            { id: 'chatbot', label: 'Trợ lý sức khỏe AI', icon: MessageSquare },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -64,25 +64,25 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Calendar className="h-5 w-5 text-blue-600" />
-                  <span>Upcoming Appointments</span>
+                  <span>Lịch hẹn sắp tới</span>
                 </CardTitle>
-                <CardDescription>Your next scheduled visits</CardDescription>
+                <CardDescription>Các lần khám đã lên lịch tiếp theo</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                     <div>
-                      <p className="font-medium">Dr. Smith</p>
-                      <p className="text-sm text-gray-600">General Checkup</p>
+                      <p className="font-medium">BS. Smith</p>
+                      <p className="text-sm text-gray-600">Khám tổng quát</p>
                     </div>
-                    <Badge variant="outline">Tomorrow 2PM</Badge>
+                    <Badge variant="outline">Ngày mai 14:00</Badge>
                   </div>
                   <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                     <div>
-                      <p className="font-medium">Dr. Johnson</p>
-                      <p className="text-sm text-gray-600">Cardiology</p>
+                      <p className="font-medium">BS. Johnson</p>
+                      <p className="text-sm text-gray-600">Tim mạch</p>
                     </div>
-                    <Badge variant="outline">Next Week</Badge>
+                    <Badge variant="outline">Tuần sau</Badge>
                   </div>
                 </div>
               </CardContent>
@@ -92,18 +92,18 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <MessageSquare className="h-5 w-5 text-green-600" />
-                  <span>Health Insights</span>
+                  <span>Thông tin sức khỏe</span>
                 </CardTitle>
-                <CardDescription>Recent AI health assessments</CardDescription>
+                <CardDescription>Đánh giá sức khỏe AI gần đây</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="p-3 bg-yellow-50 rounded-lg">
-                    <p className="text-sm font-medium">Symptom Analysis</p>
-                    <p className="text-xs text-gray-600">Mild headache - Likely stress related</p>
+                    <p className="text-sm font-medium">Phân tích triệu chứng</p>
+                    <p className="text-xs text-gray-600">Đau đầu nhẹ - Có thể do căng thẳng</p>
                   </div>
                   <Button variant="outline" size="sm" className="w-full">
-                    Start New Assessment
+                    Bắt đầu đánh giá mới
                   </Button>
                 </div>
               </CardContent>
@@ -113,19 +113,19 @@ const Dashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <User className="h-5 w-5 text-purple-600" />
-                  <span>Quick Actions</span>
+                  <span>Hành động nhanh</span>
                 </CardTitle>
-                <CardDescription>Common tasks</CardDescription>
+                <CardDescription>Các tác vụ thường dùng</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button variant="outline" size="sm" className="w-full justify-start">
-                  Book New Appointment
+                  Đặt lịch hẹn mới
                 </Button>
                 <Button variant="outline" size="sm" className="w-full justify-start">
-                  View Medical History
+                  Xem lịch sử khám bệnh
                 </Button>
                 <Button variant="outline" size="sm" className="w-full justify-start">
-                  Update Profile
+                  Cập nhật hồ sơ
                 </Button>
               </CardContent>
             </Card>

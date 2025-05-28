@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,7 @@ const ChatbotWidget = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hello! I'm your AI Health Assistant. I can help you understand your symptoms and provide preliminary health insights. Please describe your symptoms.",
+      text: "Xin chào! Tôi là Trợ lý Sức khỏe AI. Hãy mô tả triệu chứng của bạn để tôi có thể hỗ trợ.",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -41,50 +40,50 @@ const ChatbotWidget = () => {
     setInputText('');
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Gọi API BE để lấy phản hồi AI
+      const res = await fetch('/api/chatbot/diagnose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: inputText })
+      });
+      if (!res.ok) throw new Error('Lỗi kết nối máy chủ');
+      const data = await res.json();
       const botResponse: Message = {
         id: messages.length + 2,
-        text: generateBotResponse(inputText),
+        text: data.reply || "Xin lỗi, tôi chưa thể trả lời câu hỏi này. Vui lòng thử lại sau.",
         sender: 'bot',
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botResponse]);
+    } catch (err) {
+      setMessages(prev => [
+        ...prev,
+        {
+          id: messages.length + 2,
+          text: "Đã xảy ra lỗi khi kết nối tới máy chủ. Vui lòng thử lại sau.",
+          sender: 'bot',
+          timestamp: new Date()
+        }
+      ]);
+    } finally {
       setIsLoading(false);
-    }, 1500);
-  };
-
-  const generateBotResponse = (userInput: string): string => {
-    const input = userInput.toLowerCase();
-    
-    if (input.includes('headache') || input.includes('head pain')) {
-      return "Based on your symptoms of headache, this could be due to several factors like stress, dehydration, or lack of sleep. I recommend: 1) Rest in a quiet, dark room 2) Stay hydrated 3) Apply a cold compress. If symptoms persist for more than 24 hours or worsen, please consult a doctor.";
     }
-    
-    if (input.includes('fever') || input.includes('temperature')) {
-      return "Fever can indicate your body is fighting an infection. Monitor your temperature and: 1) Rest and stay hydrated 2) Take fever-reducing medication if needed 3) Wear light clothing. Seek immediate medical attention if fever exceeds 103°F (39.4°C) or persists for more than 3 days.";
-    }
-    
-    if (input.includes('cough') || input.includes('cold')) {
-      return "For cough and cold symptoms, try: 1) Warm saltwater gargling 2) Honey and warm water 3) Adequate rest 4) Stay hydrated. If symptoms persist beyond a week or you experience difficulty breathing, please consult a healthcare provider.";
-    }
-
-    return "Thank you for sharing your symptoms. Based on the information provided, I recommend monitoring your condition closely. If symptoms worsen or persist, please consult with a healthcare professional for proper diagnosis and treatment. Would you like to book an appointment with a doctor?";
   };
 
   const quickSymptoms = [
-    'Headache', 'Fever', 'Cough', 'Sore throat', 'Stomach pain', 'Fatigue'
+    'Đau đầu', 'Sốt', 'Ho', 'Đau họng', 'Đau bụng', 'Mệt mỏi'
   ];
 
   const handleQuickSymptom = (symptom: string) => {
-    setInputText(`I have ${symptom.toLowerCase()}`);
+    setInputText(`Tôi bị ${symptom.toLowerCase()}`);
   };
 
   const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
+    return date.toLocaleTimeString('vi-VN', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: false
     });
   };
 
@@ -94,13 +93,13 @@ const ChatbotWidget = () => {
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">
             <MessageSquare className="h-5 w-5" />
-            <span>AI Health Assistant</span>
+            <span>Trợ lý Sức khỏe AI</span>
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Quick Symptoms */}
+          {/* Triệu chứng nhanh */}
           <div className="mb-4">
-            <p className="text-sm text-gray-600 mb-2">Common symptoms:</p>
+            <p className="text-sm text-gray-600 mb-2">Triệu chứng thường gặp:</p>
             <div className="flex flex-wrap gap-2">
               {quickSymptoms.map((symptom) => (
                 <Button
@@ -115,7 +114,7 @@ const ChatbotWidget = () => {
             </div>
           </div>
 
-          {/* Chat Messages */}
+          {/* Tin nhắn chat */}
           <div className="h-96 overflow-y-auto space-y-4 p-4 bg-gray-50 rounded-lg mb-4">
             {messages.map((message) => (
               <div
@@ -138,7 +137,7 @@ const ChatbotWidget = () => {
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white border shadow-sm px-4 py-2 rounded-lg">
@@ -152,13 +151,13 @@ const ChatbotWidget = () => {
             )}
           </div>
 
-          {/* Input Area */}
+          {/* Khu vực nhập liệu */}
           <div className="flex space-x-2">
             <Input
-              placeholder="Describe your symptoms..."
+              placeholder="Mô tả triệu chứng của bạn..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               className="flex-1"
             />
             <Button onClick={handleSendMessage} disabled={isLoading || !inputText.trim()}>
@@ -168,7 +167,7 @@ const ChatbotWidget = () => {
 
           <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
             <p className="text-xs text-yellow-800">
-              <strong>Disclaimer:</strong> This AI assistant provides general health information only and should not replace professional medical advice. Always consult with a qualified healthcare provider for proper diagnosis and treatment.
+              <strong>Lưu ý:</strong> Trợ lý AI này chỉ cung cấp thông tin sức khỏe tổng quát và không thay thế cho tư vấn y tế chuyên môn. Luôn tham khảo ý kiến bác sĩ để được chẩn đoán và điều trị chính xác.
             </p>
           </div>
         </CardContent>

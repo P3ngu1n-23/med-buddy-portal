@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
 
 interface AuthModalProps {
@@ -22,6 +23,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
     firstName: '',
     lastName: '',
     phoneNumber: '',
+    gender: 'male',
     userType: 'patient'
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +33,13 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
+    }));
+  };
+
+  const handleGenderChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      gender: value
     }));
   };
 
@@ -44,21 +53,21 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
       
       if (mode === 'login') {
         toast({
-          title: "Login Successful",
-          description: "Welcome back! Redirecting to dashboard...",
+          title: "Đăng nhập thành công",
+          description: "Chào mừng bạn trở lại! Đang chuyển hướng đến trang chủ...",
         });
       } else {
         toast({
-          title: "Registration Successful",
-          description: "Your account has been created successfully!",
+          title: "Đăng ký thành công",
+          description: "Tài khoản của bạn đã được tạo thành công!",
         });
       }
       
       onClose();
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again.",
+        title: "Lỗi",
+        description: "Đã có lỗi xảy ra. Vui lòng thử lại.",
         variant: "destructive",
       });
     } finally {
@@ -71,14 +80,14 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold">
-            {mode === 'login' ? 'Welcome Back' : 'Create Account'}
+            {mode === 'login' ? 'Chào mừng trở lại' : 'Tạo tài khoản'}
           </DialogTitle>
         </DialogHeader>
 
         <Tabs value={mode} onValueChange={(value) => onModeChange(value as 'login' | 'register')}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="register">Register</TabsTrigger>
+            <TabsTrigger value="login">Đăng nhập</TabsTrigger>
+            <TabsTrigger value="register">Đăng ký</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
@@ -91,7 +100,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Nhập email của bạn"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -99,12 +108,12 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Mật khẩu</Label>
                     <Input
                       id="password"
                       name="password"
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Nhập mật khẩu của bạn"
                       value={formData.password}
                       onChange={handleInputChange}
                       required
@@ -116,7 +125,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                     className="w-full" 
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Signing In...' : 'Sign In'}
+                    {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
                   </Button>
                 </form>
               </CardContent>
@@ -129,22 +138,22 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
+                      <Label htmlFor="firstName">Họ</Label>
                       <Input
                         id="firstName"
                         name="firstName"
-                        placeholder="First name"
+                        placeholder="Họ"
                         value={formData.firstName}
                         onChange={handleInputChange}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
+                      <Label htmlFor="lastName">Tên</Label>
                       <Input
                         id="lastName"
                         name="lastName"
-                        placeholder="Last name"
+                        placeholder="Tên"
                         value={formData.lastName}
                         onChange={handleInputChange}
                         required
@@ -158,7 +167,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Nhập email của bạn"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -166,25 +175,43 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phoneNumber">Phone Number</Label>
+                    <Label htmlFor="phoneNumber">Số điện thoại</Label>
                     <Input
                       id="phoneNumber"
                       name="phoneNumber"
                       type="tel"
-                      placeholder="Your phone number"
+                      placeholder="Số điện thoại của bạn"
                       value={formData.phoneNumber}
                       onChange={handleInputChange}
                       required
                     />
                   </div>
+
+                  <div className="space-y-3">
+                    <Label>Giới tính</Label>
+                    <RadioGroup value={formData.gender} onValueChange={handleGenderChange}>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="male" id="male" />
+                        <Label htmlFor="male">Nam</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="female" id="female" />
+                        <Label htmlFor="female">Nữ</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="other" id="other" />
+                        <Label htmlFor="other">Khác</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Mật khẩu</Label>
                     <Input
                       id="password"
                       name="password"
                       type="password"
-                      placeholder="Create a password"
+                      placeholder="Tạo mật khẩu"
                       value={formData.password}
                       onChange={handleInputChange}
                       required
@@ -196,7 +223,7 @@ const AuthModal = ({ isOpen, onClose, mode, onModeChange }: AuthModalProps) => {
                     className="w-full" 
                     disabled={isLoading}
                   >
-                    {isLoading ? 'Creating Account...' : 'Create Account'}
+                    {isLoading ? 'Đang tạo tài khoản...' : 'Tạo tài khoản'}
                   </Button>
                 </form>
               </CardContent>

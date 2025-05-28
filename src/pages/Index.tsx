@@ -22,7 +22,7 @@ const Index = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
               <Heart className="h-8 w-8 text-blue-600" />
-              <span className="text-2xl font-bold text-gray-900">HealthCare</span>
+              <span className="text-2xl font-bold text-gray-900">Y Tế Sức Khỏe</span>
             </div>
             <div className="flex items-center space-x-4">
               <Button 
@@ -30,13 +30,13 @@ const Index = () => {
                 onClick={() => handleAuthClick('login')}
                 className="hover:bg-blue-50"
               >
-                Login
+                Đăng nhập
               </Button>
               <Button 
                 onClick={() => handleAuthClick('register')}
                 className="bg-blue-600 hover:bg-blue-700"
               >
-                Sign Up
+                Đăng ký
               </Button>
             </div>
           </div>
@@ -47,11 +47,11 @@ const Index = () => {
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Your Health, Our Priority
+            Sức Khỏe Của Bạn, Ưu Tiên Của Chúng Tôi
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Connect with qualified doctors, manage appointments, and get instant health insights 
-            with our comprehensive healthcare platform.
+            Kết nối với các bác sĩ có chuyên môn, quản lý cuộc hẹn và nhận thông tin sức khỏe tức thì 
+            với nền tảng chăm sóc sức khỏe toàn diện của chúng tôi.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -59,7 +59,7 @@ const Index = () => {
               onClick={() => handleAuthClick('register')}
               className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-3"
             >
-              Get Started
+              Bắt đầu ngay
             </Button>
             <Button 
               size="lg" 
@@ -67,7 +67,7 @@ const Index = () => {
               onClick={() => handleAuthClick('login')}
               className="text-lg px-8 py-3 hover:bg-blue-50"
             >
-              I'm a Doctor
+              Tôi là Bác sĩ
             </Button>
           </div>
         </div>
@@ -77,18 +77,18 @@ const Index = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Why Choose Our Platform?
+            Tại Sao Chọn Nền Tảng Của Chúng Tôi?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Calendar className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-                <CardTitle>Easy Scheduling</CardTitle>
+                <CardTitle>Đặt Lịch Dễ Dàng</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Book appointments with qualified doctors at your convenience. 
-                  View available time slots and manage your healthcare schedule.
+                  Đặt lịch hẹn với các bác sĩ có chuyên môn theo thời gian thuận tiện cho bạn. 
+                  Xem các khung giờ có sẵn và quản lý lịch chăm sóc sức khỏe của bạn.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -96,12 +96,12 @@ const Index = () => {
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardHeader>
                 <MessageSquare className="h-12 w-12 text-green-600 mx-auto mb-4" />
-                <CardTitle>AI Health Assistant</CardTitle>
+                <CardTitle>Trợ Lý Y Tế AI</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Get instant health insights with our AI-powered chatbot. 
-                  Describe your symptoms and receive preliminary diagnosis.
+                  Nhận thông tin sức khỏe tức thì với chatbot được hỗ trợ bởi AI. 
+                  Mô tả triệu chứng của bạn và nhận chẩn đoán sơ bộ.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -109,12 +109,12 @@ const Index = () => {
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardHeader>
                 <Star className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
-                <CardTitle>Verified Reviews</CardTitle>
+                <CardTitle>Đánh Giá Đã Xác Thực</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Read authentic patient reviews and ratings to help you 
-                  choose the right healthcare provider for your needs.
+                  Đọc các đánh giá và xếp hạng chân thực của bệnh nhân để giúp bạn 
+                  chọn đúng nhà cung cấp dịch vụ chăm sóc sức khỏe cho nhu cầu của mình.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -126,10 +126,10 @@ const Index = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-green-600">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Take Control of Your Health?
+            Sẵn Sàng Kiểm Soát Sức Khỏe Của Bạn?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of patients and healthcare providers on our platform.
+            Tham gia cùng hàng nghìn bệnh nhân và nhà cung cấp dịch vụ chăm sóc sức khỏe trên nền tảng của chúng tôi.
           </p>
           <Button 
             size="lg" 
@@ -137,7 +137,7 @@ const Index = () => {
             onClick={() => handleAuthClick('register')}
             className="text-lg px-8 py-3"
           >
-            Join Now
+            Tham gia ngay
           </Button>
         </div>
       </section>
